@@ -1,0 +1,338 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
+using System.IO;
+using BarterSystem;
+
+//check without save button
+public partial class AddSkills : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        btnRefresh.Visible = false;
+        lblMessage.Visible = false;
+        if (!IsPostBack)
+        {
+            if (Session["UserLogin"] != null)
+            {
+                string connString = ConfigurationManager.ConnectionStrings["UserDetailsConnectionString"].ConnectionString;
+                using (SqlConnection connect = new SqlConnection(connString))
+                {
+                    using (SqlCommand cmd = new SqlCommand("SELECT Id, Genre FROM tblGenre"))
+                    {
+                        cmd.Connection = connect;
+                        connect.Open();
+                        ddlGenre.DataSource = cmd.ExecuteReader();
+                        ddlGenre.DataTextField = "Genre";
+                        ddlGenre.DataValueField = "Id";
+                        ddlGenre.DataBind();
+                        connect.Close();
+                    }
+                }
+                int genreCount;
+                using (SqlConnection connect = new SqlConnection(connString))
+                {
+                    using (SqlCommand cmd = new SqlCommand("SELECT count(*) FROM tblGenre"))
+                    {
+                        cmd.Connection = connect;
+                        connect.Open();
+                        genreCount = Convert.ToInt32(cmd.ExecuteScalar().ToString());
+                    }
+                }
+                ddlGenre.Items.Insert(0, new ListItem("Select", "-1"));
+                ddlGenre.Items.Insert(genreCount + 1, new ListItem("Other", "0"));
+            }
+            else
+                Response.Redirect("Login.aspx");
+        }
+    }
+    protected void ddlGenre_SelectedIndexChange(object sender, EventArgs e)
+    {
+        if (ddlGenre.SelectedItem.Text == "Other")
+        {
+            btnRefresh.Visible = true;
+            MpeAddGenre.Show();
+        }
+        //else if(Convert.ToInt32(Session["GenreAdded"])==1)
+        //{
+        //    Session["GenreAdded"] = 0;
+        //    string connString = ConfigurationManager.ConnectionStrings["UserDetailsConnectionString"].ConnectionString;
+        //    using (SqlConnection connect = new SqlConnection(connString))
+        //    {
+        //        using (SqlCommand cmd = new SqlCommand("SELECT Id, Genre FROM tblGenre"))
+        //        {
+        //            cmd.Connection = connect;
+        //            connect.Open();
+        //            ddlGenre.DataSource = cmd.ExecuteReader();
+        //            ddlGenre.DataTextField = "Genre";
+        //            ddlGenre.DataValueField = "Id";
+        //            ddlGenre.DataBind();
+        //            connect.Close();
+        //        }
+        //    }
+        //    int genreCount;
+        //    using (SqlConnection connect = new SqlConnection(connString))
+        //    {
+        //        using (SqlCommand cmd = new SqlCommand("SELECT count(*) FROM tblGenre"))
+        //        {
+        //            cmd.Connection = connect;
+        //            connect.Open();
+        //            genreCount = Convert.ToInt32(cmd.ExecuteScalar().ToString());
+        //        }
+        //    }
+        //    ddlGenre.Items.Insert(0, new ListItem("Select", "-1"));
+        //    ddlGenre.Items.Insert(genreCount + 1, new ListItem("Other", "0"));
+        //}
+    }
+
+    protected void btnAddSkill_click(object sender, EventArgs e)
+    {
+        int skillCount = 0, genreId = 0;
+        string imgExtension = "";
+
+        Skills objSkills = new Skills();
+
+        string connString = ConfigurationManager.ConnectionStrings["UserDetailsConnectionString"].ConnectionString;
+        using (SqlConnection connect = new SqlConnection(connString))
+        {
+            using (SqlCommand cmd = new SqlCommand("Select count(*) from tblSkills where SkillName='" + tbxEnterSkill.Text + "'"))
+            {
+                cmd.Connection = connect;
+                connect.Open();
+                skillCount = Convert.ToInt32(cmd.ExecuteScalar().ToString());
+            }
+            if (ddlGenre.SelectedValue == "Other")
+            {
+                using (SqlCommand cmd = new SqlCommand("Select Id from tblGenre where Genre='" + ddlGenre.SelectedItem.Text + "'"))
+                {
+                    cmd.Connection = connect;
+                    connect.Open();
+                    genreId = Convert.ToInt32(cmd.ExecuteScalar().ToString());
+                }
+            }
+        }
+        if (skillCount == 0) //to add skill to tblSkills if not present
+        {
+            objSkills.SkillName = tbxEnterSkill.Text;
+
+            //function to add skill
+            //using (SqlConnection connect = new SqlConnection(connString))
+            //{
+            //    using (SqlCommand cmdAddSkill = new SqlCommand("INSERT INTO tblSkills (SkillName, GenreId) values (@SkillName, @GenreId)"))
+            //    {
+            //        cmdAddSkill.Connection = connect;
+            //        connect.Open();
+            //        cmdAddSkill.Parameters.AddWithValue("@SkillName", tbxEnterSkill.Text);
+            //        if (genreId == 0)
+            //        {
+            //            cmdAddSkill.Parameters.AddWithValue("@GenreId", ddlGenre.SelectedValue);
+            //            cmdAddSkill.ExecuteNonQuery();
+            //        }
+            //        else
+            //        {
+            //            cmdAddSkill.Parameters.AddWithValue("@GenreId", genreId);
+            //            cmdAddSkill.ExecuteNonQuery();
+            //        }
+            //    }
+            //}
+            if (FileSkillImage.HasFile)
+            {
+                HttpPostedFile postedImage = FileSkillImage.PostedFile;
+                string imgName = Path.GetFileName(postedImage.FileName);
+                imgExtension = Path.GetExtension(imgName);
+                int imgSize = postedImage.ContentLength;
+                if (imgSize <= 1572864)
+                {
+                    if (imgExtension.ToLower() == ".jpg" || imgExtension.ToLower() == ".png" || imgExtension.ToLower() == ".jpeg")
+                    {
+                        Stream stream = postedImage.InputStream;//returns a stream object pointing to the posted file to read the contents of the file
+                        BinaryReader binaryReader = new BinaryReader(stream);
+                        byte[] imgBytes = binaryReader.ReadBytes((int)stream.Length);
+
+                        objSkills.SkillImage = imgBytes;
+                    }
+                    else
+                    {
+                        lblMessage.Text = "File should be only in jpg/jpeg or png format";
+                        lblMessage.Visible = true;
+                        return;
+                    }
+                }
+                else
+                {
+                    lblMessage.Text = "File size should be less than 1.5MB";
+                    lblMessage.Visible = true;
+                    return;
+                }
+            }
+            objSkills.GenreId = ddlGenre.SelectedIndex;
+            objSkills.AddSkill(objSkills);
+        }
+
+        int userId, skillId;
+
+        using (SqlConnection connect = new SqlConnection(connString))
+        {
+            using (SqlCommand cmd = new SqlCommand("Select Id from tblUsers where Id='" + Convert.ToInt32(Session["UserId"]) + "'"))
+            {
+                cmd.Connection = connect;
+                connect.Open();
+                userId = Convert.ToInt32(cmd.ExecuteScalar());
+                connect.Close();
+            }
+            using (SqlCommand cmd = new SqlCommand("Select Id from tblSkills where SkillName='" + tbxEnterSkill.Text + "'"))
+            {
+                cmd.Connection = connect;
+                connect.Open();
+                skillId = Convert.ToInt32(cmd.ExecuteScalar());
+                connect.Close();
+            }
+            //using (SqlCommand cmdMapSkill = new SqlCommand("INSERT INTO tblUserSkillMapping (UserId, SkillId, SkillDetails) values (@UserId, @SkillId, @SkillDetails)"))
+            //{
+            //    cmdMapSkill.Connection = connect;
+            //    connect.Open();
+            //    cmdMapSkill.Parameters.AddWithValue("@UserId", Convert.ToInt32(Session["UserId"]));
+            //    cmdMapSkill.Parameters.AddWithValue("@SkillId", skillId);
+            //    cmdMapSkill.Parameters.AddWithValue("@SkillDetails", tbxSkillDetails.Text);
+            //    cmdMapSkill.ExecuteNonQuery();
+            //}
+        }
+        UserSkills objUserSkills = new UserSkills();
+        objUserSkills.UserId = userId;
+        objUserSkills.SkillId = skillId;
+        objUserSkills.SkillDetails = tbxSkillDetails.Text;
+        objUserSkills.MapUserWithSkills(objUserSkills);
+    }
+
+    [System.Web.Script.Services.ScriptMethod()]
+    [System.Web.Services.WebMethod]
+    public static List<string> Get_Skills(string prefixText, int count)
+    {
+        using (SqlConnection connect = new SqlConnection())
+        {
+            connect.ConnectionString = ConfigurationManager.ConnectionStrings["UserDetailsConnectionString"].ConnectionString;
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                cmd.CommandText = "select SkillName from tblSkills where SkillName like @SkillName + '%'";
+                cmd.Parameters.AddWithValue("@SkillName", prefixText);
+                cmd.Connection = connect;
+                connect.Open();
+                List<string> Skills = new List<string>();
+                using (SqlDataReader sdr = cmd.ExecuteReader())
+                {
+                    while (sdr.Read())
+                    {
+                        Skills.Add(sdr["SkillName"].ToString());
+                    }
+                }
+                connect.Close();
+                return Skills;
+            }
+        }
+    }
+
+    //protected void btnSave_click(object sender, EventArgs e)
+    //{
+    //    try
+    //    {
+    //        int userId, skillId;
+    //        string connString = ConfigurationManager.ConnectionStrings["UserDetailsConnectionString"].ConnectionString;
+    //        using (SqlConnection connect = new SqlConnection(connString))
+    //        {
+
+    //            using (SqlCommand cmd = new SqlCommand("Select Id from tblUsers where Email='" + Session["Email"] + "'"))
+    //            {
+    //                cmd.Connection = connect;
+    //                connect.Open();
+    //                userId = Convert.ToInt32(cmd.ExecuteScalar());
+    //                connect.Close();
+    //            }
+    //            using (SqlCommand cmd = new SqlCommand("Select Id from tblSkills where SkillName='" + tbxEnterSkill.Text + "'"))
+    //            {
+    //                cmd.Connection = connect;
+    //                connect.Open();
+    //                skillId = Convert.ToInt32(cmd.ExecuteScalar());
+    //                connect.Close();
+    //            }
+    //            using (SqlCommand cmdMapSkill = new SqlCommand("INSERT INTO tblUserSkillMapping (UserId, SkillId, SkillDetails) values (@UserId, @SkillId, @SkillDetails)"))
+    //            {
+    //                cmdMapSkill.Connection = connect;
+    //                connect.Open();
+    //                cmdMapSkill.Parameters.AddWithValue("@UserId", Convert.ToInt32(Session["UserId"]));
+    //                cmdMapSkill.Parameters.AddWithValue("@SkillId", skillId);
+    //                cmdMapSkill.Parameters.AddWithValue("@SkillDetails", tbxSkillDetails.Text);
+    //                cmdMapSkill.ExecuteNonQuery();
+    //                connect.Close();
+    //            }
+    //        }
+    //    }
+    //    catch (Exception exc)
+    //    {
+    //        Response.Write(exc.Message);
+    //    }
+    //}
+    protected void Refresh(object sender, EventArgs e)
+    {
+        string connString = ConfigurationManager.ConnectionStrings["UserDetailsConnectionString"].ConnectionString;
+        using (SqlConnection connect = new SqlConnection(connString))
+        {
+            using (SqlCommand cmd = new SqlCommand("SELECT Id, Genre FROM tblGenre"))
+            {
+                cmd.Connection = connect;
+                connect.Open();
+                ddlGenre.DataSource = cmd.ExecuteReader();
+                ddlGenre.DataTextField = "Genre";
+                ddlGenre.DataValueField = "Id";
+                ddlGenre.DataBind();
+                connect.Close();
+            }
+        }
+        //using (SqlConnection connect = new SqlConnection(connString))
+        //{
+        //    using (SqlCommand cmd = new SqlCommand("SELECT Id FROM tblGenre where Genre='"+ ddlGenre.SelectedItem.Text + "'"))
+        //    {
+        //        cmd.Connection = connect;
+        //        connect.Open();
+        //        int GenerId = Convert.ToInt32(cmd.ExecuteScalar());
+        //        //ddlGenre.SelectedValue = GenerId;
+        //        connect.Close();
+        //    }
+        //}
+
+        int genreCount;
+        using (SqlConnection connect = new SqlConnection(connString))
+        {
+            using (SqlCommand cmd = new SqlCommand("SELECT count(*) FROM tblGenre"))
+            {
+                cmd.Connection = connect;
+                connect.Open();
+                genreCount = Convert.ToInt32(cmd.ExecuteScalar().ToString());
+            }
+        }
+        ddlGenre.Items.Insert(0, new ListItem("Select", "-1"));
+        ddlGenre.Items.Insert(genreCount + 1, new ListItem("Other", "0"));
+    }
+    protected void SearchSkill(object sender, EventArgs e)
+    {
+        Response.Redirect("Skills.aspx");
+    }
+    protected void Comment(object sender, EventArgs e)
+    {
+        Response.Redirect("Commenting.aspx");
+    }
+    protected void Notification(object sender, EventArgs e)
+    {
+        Response.Redirect("Requests.aspx");
+    }
+    protected void lblLogout_Click(object sender, EventArgs e)
+    {
+        Session["UserLogin"] = null;
+        Response.Redirect("Login.aspx");
+    }
+}
