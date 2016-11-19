@@ -1,0 +1,688 @@
+<html>
+	<head>
+		<title>profile page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/f299e4c7c4.js"></script>
+  
+    <link href="css/nav_footer.css" rel="stylesheet" type="text/css"/>
+	 <link href="css/profile page.css" rel="stylesheet" type="text/css"/>
+
+	
+	
+	
+	</head>
+	<body>
+
+	  <!-- Above navigation bar -->   
+
+	 <nav class="[ navbar navbar-fixed-top ][ navbar-bootsnipp animate ]" role="navigation">
+    	<div class="[container-fluid ]">
+			
+				<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="[ navbar-header ]">
+				<button type="button" class="[ navbar-toggle ]" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="[ sr-only ]">Toggle navigation</span>
+					<span class="[ icon-bar ]"></span>
+					<span class="[ icon-bar ]"></span>
+					<span class="[ icon-bar ]"></span>
+				</button>
+				<div class="[ animbrand ]">
+					<a class="[ navbar-brand ][ animate ]" href="home.html"><img src="images/nav_logo.png" class="img-responsive"  alt="Responsive image"></a>
+				</div>
+			</div>
+				
+					
+			
+		
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="[ collapse navbar-collapse ]" id="bs-example-navbar-collapse-1">
+				<ul class="[ nav navbar-nav navbar-right ]">
+					
+					<li class="[ visible-xs ]">
+						<form action="http://bootsnipp.com/search" method="GET" role="search">
+							<div class="[ input-group ]">
+								<input type="text" class="[ form-control ]" name="q" placeholder="Search for snippets">
+								<span class="[ input-group-btn ]">
+									<button class="[ btn btn-primary ]" type="submit"><span class="[ glyphicon glyphicon-search ]"></span></button>
+									<button class="[ btn btn-danger ]" type="reset"><span class="[ glyphicon glyphicon-remove ]"></span></button>
+								</span>
+							</div>
+						</form>
+					</li>
+					<li><a href="#" class="[ animate ]">ABOUT</a></li>
+					<li>
+						<a href="#" class="[ dropdown-toggle ][ animate ]" data-toggle="dropdown">DOMAINS <span class="[ caret ]"></span></a>
+						<ul class="[ dropdown-menu ]" role="menu">
+							<li><a href="#" class="[ animate ]">Blog</a></li>
+							<li><a href="#" class="[ animate ]">List of resources </a></li>
+							<li><a href="#" class="[ animate ]">Download Bootstrap </a></li>
+							
+							<li><a href="#" class="[ animate ]">Browse Templates </a></li>
+							
+							<li><a href="#" class="[ animate ]">Form Builder </a></li>
+							<li><a href="#" class="[ animate ]">Button Builder </a></li>
+						</ul>
+					</li>
+					
+				
+				
+
+                    <li class="[ hidden-xs ]"><a href="#toggle-search" class="[ animate ]"><span class="[ glyphicon glyphicon-search ]"></span></a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="[ bootsnipp-search animate ]">
+			<div class="[ container-fluid ]">
+				<form action="http://bootsnipp.com/search" method="GET" role="search">
+					<div class="[ input-group ]">
+						<input type="text" class="[ form-control ]" name="q" placeholder="Search for snippets and hit enter">
+						<span class="[ input-group-btn ]">
+							<button class="[ btn btn-danger ]" type="reset"><span class="[ glyphicon glyphicon-remove ]"></span></button>
+						</span>
+					</div>
+				</form>
+			</div>
+		</div>
+	</nav>
+
+	<script>
+	$(function() { 
+
+    $('a[href="#toggle-search"], .navbar-bootsnipp .bootsnipp-search .input-group-btn > .btn[type="reset"]').on('click', function(event) {
+		event.preventDefault();
+		$('.navbar-bootsnipp .bootsnipp-search .input-group > input').val('');
+		$('.navbar-bootsnipp .bootsnipp-search').toggleClass('open');
+		$('a[href="#toggle-search"]').closest('li').toggleClass('active');
+
+		if ($('.navbar-bootsnipp .bootsnipp-search').hasClass('open')) {
+			/* I think .focus dosen't like css animations, set timeout to make sure input gets focus */
+			setTimeout(function() { 
+				$('.navbar-bootsnipp .bootsnipp-search .form-control').focus();
+			}, 100);
+		}			
+	});
+
+	$(document).on('keyup', function(event) {
+		if (event.which == 27 && $('.navbar-bootsnipp .bootsnipp-search').hasClass('open')) {
+			$('a[href="#toggle-search"]').trigger('click');
+		}
+	});
+    
+});
+	</script>
+	   
+
+   <!-- block1_profile_info  -->      
+		<div class="container-fluid">
+		<div class="profile_info">
+			<div class="row">
+				<div class="col-sm-4 col-xs-6">
+				<div class="profile_info_col1">
+					<div class="row">
+					<div class="col-sm-5 col-xs-12">
+						<div class="profile_info_image">
+						<img src="images/face2.png" class="img-responsive" style="width:30vmin height:100px;" alt="Responsive image">
+						</div>
+					</div>
+					
+					<div class="col-sm-7 col-xs-12">
+						<div class="pofile_info_text_col2">
+							<span class="profile_info_text_username">Kanika Singhal</span>
+							<span>Delhi </span>
+							<span>kanikasinghal@gmail.com</span>
+						
+						<!-- 	<span class="glyphicon glyphicon-user" style="padding-left:150px;"></span> -->
+							<span class="glyphicon glyphicon-thumbs-up"style="padding-left:150px;"></span>
+						</div>
+					</div>
+					</div>
+					</div>
+				</div>
+				<div class="col-sm-4 col-xs-0">
+					<div class="profile_info_col2">
+						<div class=" text">
+							FOLLOWERS
+						</div>
+						<div class="progression_bar1">
+								<div class="progress">
+											<div class="progress-bar" role="progressbar" aria-valuenow="70"
+											aria-valuemin="0" aria-valuemax="100" style="width:70%">
+											<span class="sr-only">70% Complete</span>
+											</div>
+								</div>
+						</div>
+						<div class=" text">
+							PROFILE VISITER
+						</div>
+						<div class="progression_bar2">
+								<div class="progress">
+											<div class="progress-bar" role="progressbar" aria-valuenow="10"
+											aria-valuemin="0" aria-valuemax="100" style="width:70%">
+											<span class="sr-only">10% Complete</span>
+											</div>
+								</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-4 col-xs-6">
+					<div class="profile_info_links_col3">
+						<div class="head">
+								QUICK LINKS
+						</div>
+						<div class="links">
+							  <li> <a href="#myModal_add_skill"  data-toggle="modal" data-target="#myModal_add_skill">Add Skill</a></li>
+							<!-- Modal_add_skill -->
+								  <div class="modal fade" id="myModal_add_skill" role="dialog">
+									<div class="modal-dialog">
+									
+									  <!-- Modal content-->
+									  <div class="modal-content">
+										<div class="modal-header">
+										  <button type="button" class="close" data-dismiss="modal">&times;</button>
+										  <h4 class="modal-title" >ADD SKILLS</h4>
+										</div>
+										<div class="modal-body">
+													<div class="container-fluid">
+													<div class="row">
+														<div class="add_skill_modal">		
+															  <form >
+																<div class="form-group">
+																<div class="col-sm-12">
+																<div >
+																 <input list="browsers" name="browser"  class="form-control"class="add_skill_dropdown" placeholder="Select Gener" ><span class="glyphicon glyphicon-refresh"></span>
+																	  <datalist id="browsers">
+																		<option value="Internet Explorer">
+																		<option value="Firefox">
+																		<option value="Chrome">
+																		<option value="Opera">
+																		<option value="Safari">
+																	  </datalist>
+																  </div>
+																  </div>
+																  </div>
+																  <div class="form-group">
+																 <div class="col-sm-12">
+																	<input type="text" class="form-control" id="email" placeholder="Enter email">
+																  </div>
+																  </div>
+																
+																<div class="form-group">
+																
+																  <div class="col-sm-12">
+																	<input type="password" class="form-control" id="pwd" placeholder="Enter password">
+																  </div>
+																</div>
+																<div class="profile_pic">
+																<label for="pic" > Change Profile Picture:</label>
+																<input type="file" name="" id="camerainput1" accept="image/*" capture="camera">
+																</div>
+								   
+																<div class="form-group">
+																  <div class="col-sm-12">
+																	<div class="modal-btn">
+																	<button type="submit" class="btn btn-primary btn-block" style="background-color:#1fbad6;">Submit</button>
+																	</div>
+																  </div>
+																</div>
+															
+															
+																
+															  </form>
+													 </div>
+												</div>
+										</div>
+										</div>
+									   
+									  </div>
+									  
+									</div>
+								  </div>
+															  
+							 <li> <a href="#myModal_edit_profile"  data-toggle="modal" data-target="#myModal_edit_profile">Edit Profile</a></li>
+							   
+										<!-- Modal -->
+									  <div class="modal fade" id="myModal_edit_profile" role="dialog">
+										<div class="modal-dialog">
+										
+										  <!-- Modal content-->
+										  <div class="modal-content">
+											<div class="modal-header">
+											  <button type="button" class="close" data-dismiss="modal">&times;</button>
+											  <h4 class="modal-title" >Edit Profile</h4>
+											</div>
+											<div class="modal-body">
+														<div class="container-fluid">
+														<div class="row">
+															<div class="add_skill_modal">		
+																  <form >
+																	<div class="form-group">
+																	<div class="col-sm-12">
+																		<input type="text" class="form-control" id="user-name" placeholder="Enter email"><span class="glyphicon glyphicon-refresh"></span>
+																	  </div>
+																	  </div>
+																	  <div class="form-group" >
+																	 <div class="col-sm-12">
+																		<input type="text" class="form-control" id="email" placeholder="Enter email"><span class="glyphicon glyphicon-refresh"></span>
+																	  </div>
+																	  </div>
+																	
+																	<div class="form-group">
+																		<div class="col-sm-12">
+																			<input type="password" class="form-control" id="pwd" placeholder="Enter password"><span class="glyphicon glyphicon-refresh"></span>
+																		 </div>
+																	</div>
+																	<div class="form-group">
+																		<div class="col-sm-12">
+																			<input type="text" class="form-control" id="city" placeholder="Enter city"><span class="glyphicon glyphicon-refresh"></span>
+																		 </div>
+																	</div>
+																	<div class="form-group">
+																		<div class="col-sm-12">
+																			<input type="number" class="form-control" id="phn" placeholder="Enter phone"><span class="glyphicon glyphicon-refresh"></span>
+																		 </div>
+																	</div>
+																	<div class="form-group">
+																	  <div class="col-sm-12">
+																		<div class="modal-btn">
+																		<button type="submit" class="btn btn-primary btn-block" style="background-color:#1fbad6;">Submit</button>
+																		</div>
+																	  </div>
+																	</div>
+																
+																
+																	
+																  </form>
+														 </div>
+													</div>
+											</div>
+											</div>
+										   
+										  </div>
+										  
+										</div>
+									  </div>
+							    <li><a href="#">Add Need</a></li>
+								 
+								 <li> <a href="#myModal_report"  data-toggle="modal" data-target="#myModal_report">Report</a></li>
+									<!-- Modal -->
+											  <div class="modal fade" id="myModal_report" role="dialog">
+												<div class="modal-dialog">
+												
+												  <!-- Modal content-->
+												  <div class="modal-content">
+													<div class="modal-header">
+													  <button type="button" class="close" data-dismiss="modal">&times;</button>
+													  <h4 class="modal-title" >Report</h4>
+													</div>
+													<div class="modal-body">
+																<div class="container-fluid">
+																	<div class="row">
+																	<div class="add_skill_modal">		
+																		  <form >
+																			<div class="form-group">
+																			<div class="col-sm-12">
+																				<input type="text" class="form-control" id="user-name" placeholder="Enter your username">
+																			  </div>
+																			  </div>
+																			  <div class="form-group" >
+																			 <div class="col-sm-12">
+																				<input type="text" class="form-control" id="user-name" placeholder="Enter username of complaning person">
+																			  </div>
+																			  </div>
+																			
+																			
+																			<div class="form-group">
+																				 <div class="col-sm-12">
+																				<textarea class="form-control" style="width:95%" rows="5" id="comment" placeholder="Write your Query"></textarea>
+																				</div>
+																			</div>
+																			
+																			<div class="form-group">
+																			  <div class="col-sm-12">
+																				<div class="modal-btn">
+																				<button type="submit" class="btn btn-primary btn-block" style="background-color:#1fbad6;">Submit</button>
+																				</div>
+																			  </div>
+																			</div>
+																		
+																		
+																			
+																		  </form>
+																	</div>
+																</div>
+																</div>
+													</div>
+												   
+												  </div>
+												  
+												</div>
+											  </div>
+									</div>
+					</div>
+				</div>
+					
+				</div>
+				</div>
+				
+			</div>
+		
+	 
+ <div class="container-fluid">
+	<div class="row">
+		<!-- SKILLS  --> 
+				<div class="col-sm-3 col-lg-3 col-xs-6">
+					 <div class="skills">	
+				  <h2>SKILLS</h2>
+				  
+				  <div class="panel-group" id="accordion">
+					<div class="panel panel-default">
+					  <div class="panel-heading">
+						<h4 class="panel-title">
+						  <a data-toggle="collapse" data-parent="#accordion" href="#collapse1_skills">Collapsible Group 1</a>
+						</h4>
+					  </div>
+					  <div id="collapse1_skills" class="panel-collapse collapse in">
+						<div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+						sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+					  </div>
+					</div>
+					<div class="panel panel-default">
+					  <div class="panel-heading">
+						<h4 class="panel-title">
+						  <a data-toggle="collapse" data-parent="#accordion" href="#collapse2_skills">Collapsible Group 2</a>
+						</h4>
+					  </div>
+					  <div id="collapse2_skills" class="panel-collapse collapse">
+						<div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+						sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+					  </div>
+					</div>
+					<div class="panel panel-default">
+					  <div class="panel-heading">
+						<h4 class="panel-title">
+						  <a data-toggle="collapse" data-parent="#accordion" href="#collapse3_skills">Collapsible Group 3</a>
+						</h4>
+					  </div>
+					  <div id="collapse3_skills" class="panel-collapse collapse">
+						<div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+						sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+					  </div>
+					</div>
+				  </div>
+
+							
+				</div>
+				</div>
+				
+				<div class="col-sm-3 col-lg-3 col-xs-6 need1">
+					<div >	
+				  <h2>NEED</h2>
+				   <div class="panel-group" id="accordion">
+					<div class="panel panel-default">
+					  <div class="panel-heading">
+						<h4 class="panel-title">
+						  <a data-toggle="collapse" data-parent="#accordion" href="#collapse1_need">Collapsible Group 1</a>
+						</h4>
+					  </div>
+					  <div id="collapse1_need" class="panel-collapse collapse in">
+						<div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+						sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+					  </div>
+					</div>
+					<div class="panel panel-default">
+					  <div class="panel-heading">
+						<h4 class="panel-title">
+						  <a data-toggle="collapse" data-parent="#accordion" href="#collapse2_need">Collapsible Group 2</a>
+						</h4>
+					  </div>
+					  <div id="collapse2_need" class="panel-collapse collapse">
+						<div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+						sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+					  </div>
+					</div>
+					<div class="panel panel-default">
+					  <div class="panel-heading">
+						<h4 class="panel-title">
+						  <a data-toggle="collapse" data-parent="#accordion" href="#collapse3_need">Collapsible Group 3</a>
+						</h4>
+					  </div>
+					  <div id="collapse3_need" class="panel-collapse collapse">
+						<div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+						sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+					  </div>
+					</div>
+				  </div>
+				 
+							
+				</div>
+				</div>
+						
+			
+			
+
+		
+							
+				
+	<div class="col-sm-6 col-lg-6 col-xs-12">
+				<div class="container-fluid">
+					<div class="profile_comment">
+	<!-- Contenedor Principal -->
+    <div class="comments-container">
+		<h1>Comment</h1>
+
+		<ul id="comments-list" class="comments-list">
+			<li>
+				<div class="comment-main-level">
+					<!-- Avatar -->
+					<div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg" alt=""></div>
+					<!-- Contenedor del Comentario -->
+					<div class="comment-box">
+						<div class="comment-head">
+							<h6 class="comment-name">Lorena Rojero</h6>
+							
+							<i class="fa fa-reply"></i>
+							<i class="fa fa-heart"></i>
+						</div>
+						<div class="comment-content">
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
+						</div>
+					</div>
+				</div>
+				<!-- Respuestas de los comentarios -->
+				<ul class="comments-list reply-list">
+					<li>
+						<!-- Avatar -->
+						<div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_2_zps7de12f8b.jpg" alt=""></div>
+						<!-- Contenedor del Comentario -->
+						<div class="comment-box">
+							<div class="comment-head">
+								<h6 class="comment-name">Lorena Rojero</h6>
+								
+								<i class="fa fa-reply"></i>
+								<i class="fa fa-heart"></i>
+							</div>
+							<div class="comment-content">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
+							</div>
+						</div>
+					</li>
+
+					<li>
+						<!-- Avatar -->
+						<div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg" alt=""></div>
+						<!-- Contenedor del Comentario -->
+						<div class="comment-box">
+							<div class="comment-head">
+								<h6 class="comment-name">Lorena Rojero</h6>
+								
+								<i class="fa fa-reply"></i>
+								<i class="fa fa-heart"></i>
+							</div>
+							<div class="comment-content">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
+							</div>
+						</div>
+					</li>
+				</ul>
+			</li>
+
+			<li>
+				<div class="comment-main-level">
+					<!-- Avatar -->
+					<div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_2_zps7de12f8b.jpg" alt=""></div>
+					<!-- Contenedor del Comentario -->
+					<div class="comment-box">
+						<div class="comment-head">
+							<h6 class="comment-name"><a href="http://creaticode.com/blog">Lorena Rojero</a></h6>
+							
+							<i class="fa fa-reply"></i>
+							<i class="fa fa-heart"></i>
+						</div>
+						<div class="comment-content">
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
+						</div>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	</div>
+</div>
+				</div>
+				<div class="col-sm-3 col-lg-3 col-xs-6">
+					<div class="need">	
+				  <h2>NEED</h2>
+				   <div class="panel-group" id="accordion">
+					<div class="panel panel-default">
+					  <div class="panel-heading">
+						<h4 class="panel-title">
+						  <a data-toggle="collapse" data-parent="#accordion" href="#collapse1_need">Collapsible Group 1</a>
+						</h4>
+					  </div>
+					  <div id="collapse1_need" class="panel-collapse collapse in">
+						<div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+						sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+					  </div>
+					</div>
+					<div class="panel panel-default">
+					  <div class="panel-heading">
+						<h4 class="panel-title">
+						  <a data-toggle="collapse" data-parent="#accordion" href="#collapse2_need">Collapsible Group 2</a>
+						</h4>
+					  </div>
+					  <div id="collapse2_need" class="panel-collapse collapse">
+						<div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+						sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+					  </div>
+					</div>
+					<div class="panel panel-default">
+					  <div class="panel-heading">
+						<h4 class="panel-title">
+						  <a data-toggle="collapse" data-parent="#accordion" href="#collapse3_need">Collapsible Group 3</a>
+						</h4>
+					  </div>
+					  <div id="collapse3_need" class="panel-collapse collapse">
+						<div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+						sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+					  </div>
+					</div>
+				  </div>
+				 
+							
+				</div>
+				</div>
+						
+			
+			</div>
+		</div>
+		
+  
+ <!-- footer -->
+	 <div class="container-fluid">
+	 <div class="footer">
+	   <div class="ft-followus-and-contact">
+		 <div class="row">
+				
+					  <div class="col-sm-4 col-lg-4 col-xs-4">
+					  
+						<li class="contact-us"><a href="#">CONTACT US</a></li>
+					
+					  </div>
+					  
+					    <div class="col-sm-4 col-lg-4 col-xs-4">
+							<div class="footer-logo">
+								<img src="images/bartar_logo_footer.png" class="img-responsive"  alt="Responsive image">
+							</div>
+						</div>
+						
+					<div class="col-sm-4 col-lg-4 col-xs-4">
+						<div class="ft-follow-us">
+							 <div class="ft-title">FOLLOW US</div>
+								 <div class="ft-glypicon2">
+									 <ul class="ft-social">
+									 <li>
+									 <a href="www.facebook.com" target="_blank" class="tb-fb"><i class="fa fa-facebook-official"></i>
+									 </a>
+									 </li>
+									 <li>
+									 <a href="www.twitter.com" target="_blank" class="tb-tw "><i class="fa fa-twitter-square"></i></a>
+									 </li>
+									 <li>
+									 <a href="www.twitter.com" target="_blank" class="tb-tw "> <i class="fa fa-google-plus-square"></i></a>
+									 </li>
+									  <li>
+									 <a href="www.twitter.com" target="_blank" class="tb-tw "> <i class="fa fa-instagram"></i></a>
+									 </li>
+								</div>	
+						</div>
+					
+					</div>
+				  </div>
+			  </div>
+		
+	
+		
+			<div class="ft-manage-by">
+			 <div class="row">
+				<div class="col-sm-12 col-lg-12 col-xs-12">
+				<div class="ft-manage-by-text">
+					MANAGE BY
+				</div>
+				</div>
+					  <div class="col-sm-4 col-lg-4 col-xs-4">
+					  <div class="ft-manageby-col1">
+					  <span>KANIKA SINGHAL</span>
+					  </div>
+					  </div>
+						<div class="col-sm-4 col-lg-4 col-xs-4">
+						 <div class="ft-manageby-col2">
+						<span>KANIKA SINGHAL</span>
+						</div>
+					  </div>
+					<div class="col-sm-4 col-lg-4 col-xs-4">
+					 <div class="ft-manageby-col3">
+					<span>KANIKA SINGHAL</span>
+					</div>
+				  </div>
+			  </div>
+		  </div>
+	  </div>
+	 
+	    </div>
+					
+	</body>
+</html>
