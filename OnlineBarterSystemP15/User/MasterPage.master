@@ -1,0 +1,164 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/f299e4c7c4.js"></script>
+    <link href="../css/nav_footer.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server">
+        </asp:ScriptManager>
+        <!-- Above navigation bar -->
+        <div class="container-fluid">
+            <div class="above-nav">
+                <div class="row">
+
+                    <div class="col-sm-6 col-xs-6">
+                        <div class="nav-logo">
+                            <img src="../image/nav_logo.png" class="img-responsive" style="width: 30vmin height:10px;" alt="Responsive image">
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-6">
+                        <div id="search-form">
+                            <form class="form-container" action="">
+
+                                <asp:TextBox ID="tbxSearch" runat="server" class="search-field"></asp:TextBox>
+                                <ajaxToolkit:AutoCompleteExtender ID="AutoCompleteExtender1" runat="server" TargetControlID="tbxSearch" MinimumPrefixLength="1" EnableCaching="true" CompletionSetCount="5" CompletionInterval="10" ServiceMethod="Get_Data">
+                                </ajaxToolkit:AutoCompleteExtender>
+                                <div class="submit-container">
+                                    <asp:Button ID="btnSearch" runat="server" Text="Search" class="submit" OnClick="btnSearch_Click" />
+                                </div>
+
+
+                                <%--</form>
+                        </div>
+                        <div id="search-form">
+                            <form class="form-container" action="">--%>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header -->
+        <nav class="navbar navbar-default" id="mynav">
+            <div class="container-fluid">
+
+                <div class="navbar-header navbar-left">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#">HOME</a></li>
+                    </ul>
+
+
+                </div>
+                <ul runat="server" class="nav navbar-nav navbar-right collapse navbar-collapse" id="myNavbar">
+                    <li><a id="navSkill" runat="server" href="#" onclick="navSkill_Click()">SKILLS</a></li>
+                    <li><a id="navUser" runat="server" href="#" onclick="navUser_Click()">USERS</a></li>
+                    <li><a id="navGenre" runat="server" href="#" onclick="navGenre_Click()">GENRES</a></li>
+                    <li><a href="#">ABOUT</a></li>
+                    <li><a href="#">LOGIN/SIGNUP</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <!-- footer -->
+        <div class="container-fluid">
+            <div class="footer">
+                <div class="ft-followus-and-contact">
+                    <div class="row">
+
+                        <div class="col-sm-4 col-lg-4 col-xs-4">
+
+                            <li class="contact-us"><a href="#">CONTACT US</a></li>
+
+                        </div>
+
+                        <div class="col-sm-4 col-lg-4 col-xs-4">
+                            <div class="footer-logo">
+                                <img src="../image/bartar_logo_footer.png" class="img-responsive" style="width: 30vmin height:10px;" alt="Responsive image">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 col-lg-4 col-xs-4">
+                            <div class="ft-follow-us">
+                                <div class="ft-title">FOLLOW US</div>
+                                <div class="ft-glypicon2">
+                                    <ul class="ft-social">
+                                        <li>
+                                            <a href="www.facebook.com" target="_blank" class="tb-fb"><i class="fa fa-facebook-official"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="www.twitter.com" target="_blank" class="tb-tw "><i class="fa fa-twitter-square"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="www.twitter.com" target="_blank" class="tb-tw "><i class="fa fa-google-plus-square"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="www.twitter.com" target="_blank" class="tb-tw "><i class="fa fa-instagram"></i></a>
+                                        </li>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+
+                <div class="ft-manage-by">
+                    <div class="row">
+                        <div class="col-sm-12 col-lg-12 col-xs-12">
+                            <div class="ft-manage-by-text">
+                                <h3>MANAGED BY</h3>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-lg-4 col-xs-4">
+                            <div class="ft-manageby-col1">
+                                <span>DIVYANSHU SHUKLA</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-lg-4 col-xs-4">
+                            <div class="ft-manageby-col2">
+                                <span>ANCHAL CHAUDHARY</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-lg-4 col-xs-4">
+                            <div class="ft-manageby-col3">
+                                <span>KANIKA SINGHAL</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script>
+        function navSkill_Click() {
+            document.getElementById("tbxSearch").placeholder = "Search Skills...";
+        }
+        function navGenre_Click() {
+            document.getElementById("tbxSearch").placeholder = "Search Genres...";
+        }
+        function navUser_Click() {
+            document.getElementById("tbxSearch").placeholder = "Search Users...";
+        }
+    </script>
+</body>
+</html>
